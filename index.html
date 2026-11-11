@@ -1,1 +1,122 @@
-日報準備中
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>我的 AI 科技日報・2026-11-11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<style>
+  /* 只要改「我的設定」的主色，整頁的重點色就跟著換 */
+  :root {
+    --accent: #b0412e;
+    --paper: #f6f3ec; --card: #ffffff; --ink: #1c1a17; --soft: #5c5850; --faint: #8f8a80;
+    --line: #e3ddd1; --tint: color-mix(in srgb, var(--accent) 9%, var(--card));
+    --serif: "Noto Serif TC", "Songti TC", serif;
+    --sans: "Noto Sans TC", -apple-system, "PingFang TC", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #16150f; --card: #211f19; --ink: #f1ede4; --soft: #c2bcb0; --faint: #8b857a;
+      --line: #36322a; --tint: color-mix(in srgb, var(--accent) 18%, var(--card));
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.7; overflow-wrap: anywhere; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  /* 刊頭 */
+  header.wrap { padding-top: 28px; }
+  .dateline { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--soft); border-bottom: 1px solid var(--ink); padding-bottom: 8px; }
+  header h1 { font-family: var(--serif); font-weight: 900; font-size: clamp(26px, 8vw, 64px); line-height: 1.15; text-align: center; margin: 18px 0 12px; letter-spacing: .04em; }
+  header h1::after { content: ""; display: block; width: 56px; height: 4px; background: var(--accent); margin: 14px auto 0; border-radius: 2px; }
+  .edition { text-align: center; color: var(--soft); font-size: 14px; margin: 0 0 18px; }
+  .edition b { color: var(--accent); }
+
+  /* 分類導覽：手機可以左右滑 */
+  nav { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(8px); border-top: 3px double var(--ink); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; gap: 8px; overflow-x: auto; padding-top: 10px; padding-bottom: 10px; scrollbar-width: none; }
+  nav a { flex: none; font-size: 14px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); white-space: nowrap; }
+  nav a b { margin-left: 6px; color: var(--accent); font-weight: 700; }
+  nav a:hover { border-color: var(--accent); }
+
+  main.wrap { padding-top: 28px; padding-bottom: 40px; }
+  .eyebrow { font-size: 12px; letter-spacing: .2em; color: var(--accent); font-weight: 700; margin: 0 0 6px; }
+
+  /* 今日首選 */
+  .pick { position: relative; background: var(--card); border-radius: 18px; padding: 28px 32px; margin-bottom: 36px; box-shadow: 0 1px 0 var(--line), 0 18px 40px -24px rgba(0,0,0,.25); overflow: hidden; }
+  .pick::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 6px; background: var(--accent); }
+  .pick-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+  .pick h2 { margin: 0; font-size: 14px; letter-spacing: .2em; color: var(--accent); }
+  .pick-score { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: var(--soft); }
+  .dots { display: inline-flex; gap: 4px; }
+  .dots i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--accent); }
+  .dots i.on { background: var(--accent); }
+  .pick h3 { font-family: var(--serif); font-weight: 900; font-size: clamp(24px, 3.6vw, 36px); line-height: 1.4; margin: 14px 0 14px; }
+  .pick h3 a:hover { color: var(--accent); }
+  .pick-why { background: var(--tint); border-radius: 12px; padding: 14px 18px; margin: 0 0 16px; font-size: 16px; }
+  .pick-why strong { color: var(--accent); }
+  .pick-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pick-tags span { background: var(--accent); color: #fff; border-radius: 999px; padding: 3px 12px; font-size: 13px; font-weight: 500; }
+  .pick .meta { margin: 14px 0 0; color: var(--faint); font-size: 13px; }
+
+  /* 本週熱詞 */
+  div.hot { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px 26px; margin-bottom: 40px; }
+  div.hot h2 { font-family: var(--serif); font-size: 22px; margin: 0; }
+  div.hot > p { margin: 2px 0 14px; color: var(--faint); font-size: 13px; }
+  div.hot ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px 28px; }
+  div.hot li { display: grid; grid-template-columns: 1fr; gap: 4px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
+  div.hot .word { font-weight: 700; }
+  div.hot .word b { display: inline-block; font-size: 11px; line-height: 1; padding: 4px 7px; border-radius: 6px; background: var(--accent); color: #fff; margin-left: 4px; vertical-align: 2px; }
+  div.hot .word b.b-new { background: var(--ink); color: var(--paper); }
+  div.hot .bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  div.hot .bar span { display: block; height: 100%; background: var(--faint); border-radius: 3px; }
+  div.hot li.hot .bar span, div.hot li.new .bar span { background: var(--accent); }
+  div.hot .num { font-size: 12px; color: var(--faint); }
+
+  /* 各類別 */
+  section.cat { margin-bottom: 40px; scroll-margin-top: 64px; }
+  section.cat h2 { font-family: var(--serif); font-size: 26px; margin: 0 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--ink); display: flex; align-items: baseline; gap: 10px; }
+  section.cat h2 small { font-family: var(--sans); font-size: 13px; font-weight: 500; color: var(--accent); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  article { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; transition: transform .15s ease, box-shadow .15s ease; }
+  article:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -18px rgba(0,0,0,.35); }
+  article .src { display: flex; justify-content: space-between; gap: 8px; margin: 0 0 6px; font-size: 12px; color: var(--accent); font-weight: 700; letter-spacing: .04em; }
+  article .src time { color: var(--faint); font-weight: 400; }
+  article h3 { font-family: var(--serif); font-size: 19px; line-height: 1.5; margin: 0 0 10px; }
+  article h3 a:hover { color: var(--accent); }
+  .short { font-weight: 700; margin: 0 0 6px; }
+  .long { color: var(--soft); font-size: 15px; margin: 0 0 12px; }
+  .kws { margin: auto 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .kw { font-size: 12px; padding: 2px 9px; border-radius: 999px; background: var(--paper); color: var(--soft); border: 1px solid var(--line); }
+  .kw.is-hot { color: var(--accent); border-color: var(--accent); font-weight: 700; }
+
+  footer { border-top: 1px solid var(--line); padding: 20px 0 40px; color: var(--faint); font-size: 13px; text-align: center; }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 0 16px; }
+    .pick { padding: 22px 20px 22px 24px; border-radius: 14px; }
+    div.hot { padding: 18px; }
+    .grid { grid-template-columns: 1fr; }
+    .dateline span:last-child { display: none; }
+  }
+</style>
+</head>
+<body>
+<header class="wrap">
+  <div class="dateline"><span>2026-11-11・台北時間</span><span>資料期間 2026-11-05 至 2026-11-11 對比 2026-10-15 至 2026-11-04</span></div>
+  <h1>我的 AI 科技日報</h1>
+  <p class="edition">本期 <b>20</b> 則・由 n8n 與 Gemini 自動編輯</p>
+</header>
+<nav aria-label="新聞分類"><div class="wrap"><a href="#cat-1">AI 與軟體<b>5</b></a><a href="#cat-2">晶片與硬體<b>1</b></a><a href="#cat-3">資安<b>7</b></a><a href="#cat-4">雲端與企業 IT<b>1</b></a><a href="#cat-5">產業與市場<b>2</b></a><a href="#cat-6">政策與社會<b>1</b></a><a href="#cat-7">其他<b>3</b></a></div></nav>
+<main class="wrap">
+  <section class="pick" aria-labelledby="pick-title"><div class="pick-heading"><h2 id="pick-title">今日首選</h2><span class="pick-score"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>4 分／滿分 4 分</span></div><h3><a href="https://www.ithome.com.tw/news/180405" target="_blank" rel="noopener noreferrer">微軟警告Outlook零時差漏洞已遭到利用</a></h3><p class="pick-why"><strong>為什麼值得發：</strong>點名知名企業、提供具體漏洞數據且涉及職場常用通訊工具。</p><div class="pick-tags"><span>在地／點名</span><span>具體</span><span>跟工作有關</span><span>熱詞</span></div><p class="meta">iThome・資安</p></section>
+  <div class="hot"><p class="eyebrow">TRENDING</p><h2>本週熱詞</h2><p>本週出現次數對比前三週平均（Asia/Taipei）</p><ul><li class="hot"><span class="word">資安漏洞 <b>熱</b> <b class="b-new">新</b></span><span class="bar"><span style="width:100%"></span></span><span class="num">本週 4 次・平常每週 0 次・5 倍</span></li><li class="new"><span class="word">Mythos <b class="b-new">新</b></span><span class="bar"><span style="width:75%"></span></span><span class="num">本週 2 次・平常每週 0 次・3 倍</span></li><li class="new"><span class="word">零時差漏洞 <b class="b-new">新</b></span><span class="bar"><span style="width:75%"></span></span><span class="num">本週 2 次・平常每週 0 次・3 倍</span></li><li class="hot"><span class="word">資安 <b>熱</b></span><span class="bar"><span style="width:44%"></span></span><span class="num">本週 12 次・平常每週 6.33 次・1.77 倍</span></li><li class=""><span class="word">個資外洩</span><span class="bar"><span style="width:56%"></span></span><span class="num">本週 2 次・平常每週 0.33 次・2.25 倍</span></li><li class=""><span class="word">AI 學習</span><span class="bar"><span style="width:50%"></span></span><span class="num">本週 1 次・平常每週 0 次・2 倍</span></li><li class=""><span class="word">Claude Fable</span><span class="bar"><span style="width:50%"></span></span><span class="num">本週 1 次・平常每週 0 次・2 倍</span></li><li class=""><span class="word">CSA</span><span class="bar"><span style="width:50%"></span></span><span class="num">本週 1 次・平常每週 0 次・2 倍</span></li><li class=""><span class="word">Fireworks AI</span><span class="bar"><span style="width:50%"></span></span><span class="num">本週 1 次・平常每週 0 次・2 倍</span></li><li class=""><span class="word">Galaxy Watch</span><span class="bar"><span style="width:50%"></span></span><span class="num">本週 1 次・平常每週 0 次・2 倍</span></li></ul></div>
+  <section class="cat" id="cat-1"><h2>AI 與軟體 <small>5 則</small></h2><div class="grid"><article><p class="src">iThome<time>11/11 19:11</time></p><h3><a href="https://www.ithome.com.tw/news/180408" target="_blank" rel="noopener noreferrer">Claude新增試算表與協作白板，還能直接操作第三方App</a></h3><p class="short">Claude 推出試算表與協作白板功能，並可操作第三方 App。</p><p class="long">Anthropic 推出 Claude Sheets 與 Claude Whiteboards 擴充工作功能。升級後的互動式連接器讓使用者可直接在 Claude 內操作第三方應用程式。此舉旨在提升用戶的數位協作效率。</p><p class="kws"><span class="kw">Anthropic</span><span class="kw">Claude</span><span class="kw">Claude Sheets</span><span class="kw">互動式連接器</span></p></article><article><p class="src">iThome<time>11/11 19:11</time></p><h3><a href="https://www.ithome.com.tw/news/180406" target="_blank" rel="noopener noreferrer">Anthropic公布Claude Fable、Mythos 5.2，效能提高30%、降價20%</a></h3><p class="short">Anthropic 發布新版旗艦模型，效能提升 30% 且降價 20%。</p><p class="long">Anthropic 公布 Claude Fable 5.2 與 Mythos 5.2，輸出效能比前代快 30%。新模型不僅在推理與程式撰寫能力上提升，成本更降價 20%。此為該公司最新版旗艦模型。</p><p class="kws"><span class="kw">Anthropic</span><span class="kw">Claude Fable</span><span class="kw is-hot">Mythos</span><span class="kw">效能</span></p></article><article><p class="src">iThome<time>11/11 17:11</time></p><h3><a href="https://www.ithome.com.tw/news/180401" target="_blank" rel="noopener noreferrer">Reddit利用AI整理商品評價，首波涵蓋約1萬項商品</a></h3><p class="short">Reddit 利用 AI 彙整商品評價，首波提供萬項商品分析。</p><p class="long">Reddit 推出 Reddit Reviews 功能，利用 AI 歸納社群內的商品討論。系統自動整理優缺點，協助消費者比較商品，首波涵蓋約 1 萬項商品。此功能旨在簡化消費者搜尋建議的流程。</p><p class="kws"><span class="kw">Reddit</span><span class="kw">Reddit Reviews</span><span class="kw">AI</span><span class="kw">商品評價</span></p></article><article><p class="src">iThome<time>11/11 16:11</time></p><h3><a href="https://www.ithome.com.tw/news/180397" target="_blank" rel="noopener noreferrer">迪士尼擴大與Adobe的AI合作，從樂園設計延伸至電影與體育內容</a></h3><p class="short">迪士尼與 Adobe 擴大 AI 合作，將應用於電影後製與體育內容。</p><p class="long">Adobe 與迪士尼建立多年期聯盟，將利用 Firefly Foundry 開發生成式 AI 模型。合作範圍從樂園設計延伸至影視後製、視覺特效與 ESPN 體育內容製作。此舉旨在開發符合迪士尼作品需求的 AI 工具。</p><p class="kws"><span class="kw">Adobe</span><span class="kw">迪士尼</span><span class="kw">Firefly Foundry</span><span class="kw">生成式 AI</span></p></article><article><p class="src">科技新報<time>11/11 11:39</time></p><h3><a href="https://technews.tw/2026/11/11/openai-introduces-businesses-in-chatgpt/" target="_blank" rel="noopener noreferrer">經過驗證的企業進駐 ChatGPT，專屬企業 Agent 展開對話</a></h3><p class="short">OpenAI 推出企業驗證專案，強化 ChatGPT 企業代理服務。</p><p class="long">OpenAI 推動新專案，允許企業認領、驗證並更新在 ChatGPT 呈現的服務資訊。符合資格的企業還能讓專屬企業 Agent 與使用者展開對話。此舉旨在提升企業產品資訊的正確性。</p><p class="kws"><span class="kw">OpenAI</span><span class="kw">ChatGPT</span><span class="kw">企業 Agent</span><span class="kw">驗證</span></p></article></div></section><section class="cat" id="cat-2"><h2>晶片與硬體 <small>1 則</small></h2><div class="grid"><article><p class="src">科技新報<time>11/11 11:50</time></p><h3><a href="https://technews.tw/2026/11/11/samsung-patent-galaxy-watch-measure-abdominal-fat/" target="_blank" rel="noopener noreferrer">三星最新專利曝光，未來 Galaxy Watch 有望精準測量內臟脂肪</a></h3><p class="short">三星最新專利曝光，Galaxy Watch 或能精準測量內臟脂肪。</p><p class="long">三星一項專利描述利用超寬頻（UWB）雷達掃描腹部以監測健康數據。該技術結合生物電阻抗（BIA）數據，目標是精準測量內臟脂肪。此功能有望出現在未來的 Galaxy Watch 產品中。</p><p class="kws"><span class="kw">三星</span><span class="kw">Galaxy Watch</span><span class="kw">UWB</span><span class="kw">內臟脂肪</span></p></article></div></section><section class="cat" id="cat-3"><h2>資安 <small>7 則</small></h2><div class="grid"><article><p class="src">iThome<time>11/11 19:11</time></p><h3><a href="https://www.ithome.com.tw/news/180410" target="_blank" rel="noopener noreferrer">Apple發布iOS、iPadOS 27.2.1與18.7.12版，緊急修補10個資安漏洞</a></h3><p class="short">Apple 發布系統更新，修補包含 iMessage 等 10 個漏洞。</p><p class="long">Apple 發布 iOS 27.2.1 及 18.7.12 安全更新，修補共 10 個獨立漏洞。受影響功能集中在 iMessage、AirPlay 及 Bluetooth。建議使用者盡速更新以確保設備安全。</p><p class="kws"><span class="kw">Apple</span><span class="kw">iOS</span><span class="kw">iMessage</span><span class="kw is-hot">資安漏洞</span></p></article><article><p class="src">iThome<time>11/11 19:11</time></p><h3><a href="https://www.ithome.com.tw/news/180405" target="_blank" rel="noopener noreferrer">微軟警告Outlook零時差漏洞已遭到利用</a></h3><p class="short">微軟警告 Outlook 零時差漏洞已遭利用，呼籲用戶儘速修補。</p><p class="long">微軟於 11 月例行更新中修補超過 1,000 個漏洞。其中 Outlook 的一個零時差漏洞已偵測到利用活動。公司呼籲用戶應儘速安裝修補程式以防範攻擊。</p><p class="kws"><span class="kw">微軟</span><span class="kw">Outlook</span><span class="kw is-hot">零時差漏洞</span><span class="kw is-hot">資安</span></p></article><article><p class="src">iThome<time>11/11 19:11</time></p><h3><a href="https://www.ithome.com.tw/news/180409" target="_blank" rel="noopener noreferrer">日本宜得利系統遭非法存取，外洩企業會員、客戶個資近3,800萬筆</a></h3><p class="short">日本宜得利系統遭駭，外洩近 3,800 萬筆客戶個資。</p><p class="long">日本宜得利集團公告系統遭非法存取，導致最高 3,762 萬筆個資外洩。受影響範圍包括個人、企業會員及線上商店消費者。公司已切斷存取並配合外部機構進行調查。</p><p class="kws"><span class="kw">宜得利</span><span class="kw">Nitori</span><span class="kw">個資外洩</span><span class="kw is-hot">資安</span></p></article><article><p class="src">iThome<time>11/11 19:11</time></p><h3><a href="https://www.ithome.com.tw/news/180407" target="_blank" rel="noopener noreferrer">Fireworks AI遭駭波及Notion，部分AI對話紀錄遭未授權存取</a></h3><p class="short">Fireworks AI 遭駭波及 Notion，導致部分對話紀錄外洩。</p><p class="long">Fireworks AI 遭駭影響雲端協作平臺 Notion，導致部分 AI 對話紀錄遭未授權存取。Notion 表示此事件涉及約 1% 的工作空間。受影響客戶已獲得通知。</p><p class="kws"><span class="kw">Fireworks AI</span><span class="kw">Notion</span><span class="kw is-hot">資安</span><span class="kw">工作空間</span></p></article><article><p class="src">iThome<time>11/11 18:11</time></p><h3><a href="https://www.ithome.com.tw/news/180404" target="_blank" rel="noopener noreferrer">微軟發布11月例行更新，修補1,094個資安漏洞</a></h3><p class="short">微軟 11 月例行更新修補 1,094 個漏洞，總數較上月減少。</p><p class="long">微軟發布 11 月例行更新，總計修補 1,094 個 CVE 編號漏洞。若加上 Chrome 的漏洞，本月總修補數達 1,259 個。相較於上個月的 1,413 個漏洞，本月數量明顯減少。</p><p class="kws"><span class="kw">微軟</span><span class="kw">例行更新</span><span class="kw">CVE</span><span class="kw is-hot">資安漏洞</span></p></article><article><p class="src">iThome<time>11/11 16:11</time></p><h3><a href="https://www.ithome.com.tw/news/180399" target="_blank" rel="noopener noreferrer">俄羅斯駭客入侵羅馬尼亞政府Exchange伺服器，意圖竊取北約及歐盟相關郵件</a></h3><p class="short">俄駭客入侵羅馬尼亞政府伺服器，旨在竊取北約與歐盟情資。</p><p class="long">資安業者 ESET 揭露駭客組織 Turla 入侵哈薩克與羅馬尼亞政府的伺服器。攻擊者利用惡意程式 Cereal 蒐集北約及歐盟相關郵件情報。此惡意程式工具組先前未曾曝光。</p><p class="kws"><span class="kw">ESET</span><span class="kw">Turla</span><span class="kw">Microsoft Exchange</span><span class="kw">北約</span></p></article><article><p class="src">iThome<time>11/11 16:11</time></p><h3><a href="https://www.ithome.com.tw/news/180348" target="_blank" rel="noopener noreferrer">柏克萊研究推演2027至2029年AI資安威脅，AI代理供應鏈與自動化攻防成焦點</a></h3><p class="short">柏克萊研究預測未來 AI 資安威脅，AI 代理與供應鏈成焦點。</p><p class="long">柏克萊分校研究提出 2027 至 2029 年三種 AI 資安威脅情境。攻擊者將利用 AI 強化社交工程並自動尋找漏洞。此外，企業與供應商 AI 代理間的信任關係將成為攻擊新熱點。</p><p class="kws"><span class="kw">柏克萊分校</span><span class="kw">AI 資安</span><span class="kw">AI 代理</span><span class="kw">供應鏈</span></p></article></div></section><section class="cat" id="cat-4"><h2>雲端與企業 IT <small>1 則</small></h2><div class="grid"><article><p class="src">iThome<time>11/11 16:11</time></p><h3><a href="https://www.ithome.com.tw/news/180249" target="_blank" rel="noopener noreferrer">CSA建議企業推動資安職能轉型，從漏洞管理導入AI代理</a></h3><p class="short">CSA 建議資安團隊導入 AI 代理，推動職能轉型以提升效率。</p><p class="long">雲端安全聯盟（CSA）建議企業利用 AI 代理協助漏洞分析與程式碼檢查。小型團隊搭配 AI 代理可完成過去需要大團隊處理的任務。企業應先調整工作流程再決定是否改變人力規模。</p><p class="kws"><span class="kw">CSA</span><span class="kw">AI 代理</span><span class="kw">資安職能</span><span class="kw">漏洞管理</span></p></article></div></section><section class="cat" id="cat-5"><h2>產業與市場 <small>2 則</small></h2><div class="grid"><article><p class="src">iThome<time>11/11 17:11</time></p><h3><a href="https://www.ithome.com.tw/news/180402" target="_blank" rel="noopener noreferrer">Anthropic啟動IPO投資人說明會，最多募資625億美元</a></h3><p class="short">Anthropic 啟動 IPO 說明會，最高募資額預計達 625 億美元。</p><p class="long">Anthropic 宣布啟動 IPO 投資人巡迴說明會，每股價格區間為 70 至 78 美元。若按上限計算，公司募資額最高可達 625 億美元。此次 IPO 由高盛及摩根士丹利擔任承銷商。</p><p class="kws"><span class="kw">Anthropic</span><span class="kw">IPO</span><span class="kw">高盛</span><span class="kw">募資</span></p></article><article><p class="src">科技新報<time>11/11 11:40</time></p><h3><a href="https://technews.tw/2026/11/11/sony-ceo-ai-animation-lacks-soul/" target="_blank" rel="noopener noreferrer">Sony 押寶動漫成下一個成長引擎，執行長重批 AI 缺乏靈魂：原創 IP 才是長線價值</a></h3><p class="short">Sony 執行長強調原創 IP 價值，認為 AI 缺乏靈魂難成重心。</p><p class="long">索尼（Sony）執行長重申原創內容與智慧財產（IP）的長線價值。他批評 AI 缺乏靈魂，並將動漫視為公司未來成長的關鍵引擎。公司戰略將持續聚焦於建構原創內容生態。</p><p class="kws"><span class="kw">索尼</span><span class="kw">Sony</span><span class="kw">原創 IP</span><span class="kw">執行長</span></p></article></div></section><section class="cat" id="cat-6"><h2>政策與社會 <small>1 則</small></h2><div class="grid"><article><p class="src">iThome<time>11/11 16:11</time></p><h3><a href="https://www.ithome.com.tw/news/180258" target="_blank" rel="noopener noreferrer">澳洲更新關鍵基礎設施資安指引，強化網路隔離措施並納入AI風險管理建議</a></h3><p class="short">澳洲更新基礎設施資安指引，納入 AI 風險管理建議。</p><p class="long">澳洲內政部更新關鍵基礎設施風險管理計畫指引，強調身分驗證與網路隔離。新指引首次將 AI 系統帶來的營運風險納入管理建議。業者被要求針對關鍵系統採用防釣魚多因素驗證。</p><p class="kws"><span class="kw">澳洲內政部</span><span class="kw">關鍵基礎設施</span><span class="kw">AI 風險</span><span class="kw">身分驗證</span></p></article></div></section><section class="cat" id="cat-7"><h2>其他 <small>3 則</small></h2><div class="grid"><article><p class="src">科技新報<time>11/11 11:42</time></p><h3><a href="https://technews.tw/2026/11/11/information-month/" target="_blank" rel="noopener noreferrer">迎戰 AI 時代！2026 資訊月三大亮點打造全民 AI 學習體驗場域</a></h3><p class="short">2026 資訊月聚焦全民 AI 學習，應對 AI 取代工作擔憂。</p><p class="long">2026 資訊月打造 AI 學習體驗場域，關注 AI 是否取代工作的全民焦點。展覽重點包含下一代應學習的工具與解決問題的能力。旨在協助民眾在高速發展的 AI 時代進行職能轉型。</p><p class="kws"><span class="kw">資訊月</span><span class="kw">AI 學習</span><span class="kw">職能轉型</span></p></article><article><p class="src">科技新報<time>11/11 11:35</time></p><h3><a href="https://technews.tw/2026/11/11/the-ai-%e2%80%8b%e2%80%8bmyth-is-backfiring-on-the-tech-industry-experts-warn-that-excessive-hype-is-eroding-public-trust/" target="_blank" rel="noopener noreferrer">AI 神話正在反噬科技產業，專家：過度炒作恐讓大眾失去信任</a></h3><p class="short">專家警告 AI 過度炒作恐讓大眾失去信任，反噬科技產業發展。</p><p class="long">專家指出科技巨頭不斷宣稱 AI 將超越人類智慧，可能造成過度炒作。若 AI 表現未達預期，恐讓大眾對科技失去信任。此種 AI 神話現象正在對科技產業產生負面影響。</p><p class="kws"><span class="kw">AI 炒作</span><span class="kw">科技產業</span><span class="kw">信任</span></p></article><article><p class="src">科技新報<time>11/11 11:30</time></p><h3><a href="https://technews.tw/2026/11/11/what-is-the-dead-internet-theory-and-should-humanity-be-worried/" target="_blank" rel="noopener noreferrer">機器人流量首度壓過人類，AI 平台一年多吸 356 億次造訪</a></h3><p class="short">機器人流量首度超越人類，AI 平台一年吸引 356 億次造訪。</p><p class="long">資安業者 Thales 報告指出，機器人流量已首度壓過人類。統計顯示 AI 相關平台在一年多內共吸引了 356 億次造訪。此趨勢讓「死亡網路理論」再度引發產業界關注。</p><p class="kws"><span class="kw">機器人流量</span><span class="kw">Thales</span><span class="kw">死亡網路理論</span><span class="kw">造訪次數</span></p></article></div></section>
+</main>
+<footer><div class="wrap">這份日報每天早上由我自己做的 n8n 流程自動產生</div></footer>
+</body>
+</html>
